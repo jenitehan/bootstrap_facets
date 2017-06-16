@@ -13,7 +13,7 @@
  */
 #}
 {% if is_active %}
-  <span class="facet-item__status js-facet-deactivate">(-)</span>
+  <span class="glyphicon glyphicon-remove facet-item__status js-facet-deactivate" aria-hidden="true"></span>
 {% endif %}
 <span class="facet-item__value">{{ value }}</span>
 {% if show_count %}
