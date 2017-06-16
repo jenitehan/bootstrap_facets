@@ -17,7 +17,7 @@ function bootstrap_facets_form_alter(&$form, \Drupal\Core\Form\FormStateInterfac
         '#type' => 'select',
         '#options' => [
           'list_group' => t('List group'),
-          //'button_group' => t('Button group'),
+          'single_button_dropdown' => t('Single button dropdown'),
         ],
         '#empty_option' => t('- None -'),
         '#default_value' => isset($widget['config']['bootstrap_component']) ? $widget['config']['bootstrap_component'] : '',
@@ -62,6 +62,15 @@ function bootstrap_facets_preprocess_bootstrap_facets_list_group(&$variables) {
 }
 
 /**
+ * Make sure single button dropdown has a title.
+ */
+function bootstrap_facets_preprocess_bootstrap_facets_single_button_dropdown(&$variables) {
+  $facet_id = $variables['facet_id'];
+  $facet = \Drupal::entityTypeManager()->getStorage('facets_facet')->load($facet_id);
+  $variables['title'] = $facet->label();
+}
+
+/**
  * Implements hook_theme().
  */
 function bootstrap_facets_theme($existing, $type, $theme, $path) {
@@ -70,6 +79,12 @@ function bootstrap_facets_theme($existing, $type, $theme, $path) {
       'base hook' => 'facets_item_list',
     ],
     'bootstrap_facets_list_group_result_item' => [
+      'base hook' => 'facets_result_item',
+    ],
+    'bootstrap_facets_single_button_dropdown' => [
+      'base hook' => 'facets_item_list',
+    ],
+    'bootstrap_facets_single_button_dropdown_result_item' => [
       'base hook' => 'facets_result_item',
     ],
   ];
