@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * Implements hook_form_alter().
+ */
+function bootstrap_facets_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'facets_facet_edit_form'){
+    
+    // Get the current widget.
+    $build_info = $form_state->getBuildInfo();
+    $widget = $build_info['callback_object']->getEntity()->getWidget();
+    
+    // Add our field if it's a list widget.
+    if ($widget && $widget['type'] == 'links') {  
+      $form['widget_config']['bootstrap_component'] = [
+        '#title' => t('Bootstrap component'),
+        '#type' => 'select',
+        '#options' => [
+          'list_group' => t('List group'),
+          //'button_group' => t('Button group'),
+        ],
+        '#empty_option' => t('- None -'),
+        '#default_value' => isset($widget['config']['bootstrap_component']) ? $widget['config']['bootstrap_component'] : '',
+      ];
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function bootstrap_facets_theme_suggestions_facets_item_list_alter(&$suggestions, $variables) {
+  $facet_id = $variables['facet_id'];
+  $widget = \Drupal::entityTypeManager()->getStorage('facets_facet')->load($facet_id)->getWidget();
+  if (isset($widget['config']['bootstrap_component'])) {
+    $suggestions[] = 'bootstrap_facets_' . $widget['config']['bootstrap_component'];
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function bootstrap_facets_theme_suggestions_facets_result_item_alter(&$suggestions, $variables) {
+  $facet_id = $variables['facet_id'];
+  $widget = \Drupal::entityTypeManager()->getStorage('facets_facet')->load($facet_id)->getWidget();
+  if (isset($widget['config']['bootstrap_component'])) {
+    $suggestions[] = 'bootstrap_facets_' . $widget['config']['bootstrap_component'] . '_result_item';
+  }
+}
+
+/**
+ * Add bootstrap class to each link to make them a list group item.
+ */
+function bootstrap_facets_preprocess_bootstrap_facets_list_group(&$variables) {
+  $items = $variables['items'];
+  foreach ($items as $key => $item) {
+    $variables['items'][$key]['value']['#attributes']['class'][] = 'list-group-item';
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function bootstrap_facets_theme($existing, $type, $theme, $path) {
+  return [
+    'bootstrap_facets_list_group' => [
+      'base hook' => 'facets_item_list',
+    ],
+    'bootstrap_facets_list_group_result_item' => [
+      'base hook' => 'facets_result_item',
+    ],
+  ];
+}
