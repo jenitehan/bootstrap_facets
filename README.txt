@@ -1,4 +1,4 @@
-Outputs facet links as Boostrap components.
+Drupal 8 module to output facet links as Boostrap components.
 
 Only list group is available right now, but others will be added.
 
