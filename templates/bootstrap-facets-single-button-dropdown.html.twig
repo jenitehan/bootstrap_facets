@@ -24,15 +24,11 @@
 {% if context.list_style %}
   {%- set attributes = attributes.addClass('item-list__' ~ context.list_style) %}
 {% endif %}
-
 <div class="btn-group">
-
 {% if items or empty %}
-  
   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     {{ title }} <span class="caret"></span>
   </button>
-
   {%- if items -%}
     <ul{{ attributes.addClass('dropdown-menu') }}>
       {%- for item in items -%}
@@ -43,5 +39,4 @@
     {{- empty -}}
   {%- endif -%}
 {%- endif %}
-
 </div>
