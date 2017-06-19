@@ -4,7 +4,7 @@ Depends on the Facets module:
 
 https://www.drupal.org/project/facets
 
-List group and single button dropdowns are the currently available components.
+List group, single button dropdown, and split button dropdown are the currently available components.
 
 Requires Bootstrap 3 through the Drupal Bootstrap theme or by any other means.
 

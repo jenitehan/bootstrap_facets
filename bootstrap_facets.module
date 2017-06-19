@@ -18,6 +18,7 @@ function bootstrap_facets_form_alter(&$form, \Drupal\Core\Form\FormStateInterfac
         '#options' => [
           'list_group' => t('List group'),
           'single_button_dropdown' => t('Single button dropdown'),
+          'split_button_dropdown' => t('Split button dropdown'),
         ],
         '#empty_option' => t('- None -'),
         '#default_value' => isset($widget['config']['bootstrap_component']) ? $widget['config']['bootstrap_component'] : '',
@@ -71,6 +72,15 @@ function bootstrap_facets_preprocess_bootstrap_facets_single_button_dropdown(&$v
 }
 
 /**
+ * Make sure split button dropdown has a title.
+ */
+function bootstrap_facets_preprocess_bootstrap_facets_split_button_dropdown(&$variables) {
+  $facet_id = $variables['facet_id'];
+  $facet = \Drupal::entityTypeManager()->getStorage('facets_facet')->load($facet_id);
+  $variables['title'] = $facet->label();
+}
+
+/**
  * Implements hook_theme().
  */
 function bootstrap_facets_theme($existing, $type, $theme, $path) {
@@ -85,6 +95,12 @@ function bootstrap_facets_theme($existing, $type, $theme, $path) {
       'base hook' => 'facets_item_list',
     ],
     'bootstrap_facets_single_button_dropdown_result_item' => [
+      'base hook' => 'facets_result_item',
+    ],
+    'bootstrap_facets_split_button_dropdown' => [
+      'base hook' => 'facets_item_list',
+    ],
+    'bootstrap_facets_split_button_dropdown_result_item' => [
       'base hook' => 'facets_result_item',
     ],
   ];
