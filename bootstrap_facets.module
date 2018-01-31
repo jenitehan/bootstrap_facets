@@ -31,7 +31,14 @@ function bootstrap_facets_form_alter(&$form, \Drupal\Core\Form\FormStateInterfac
  * Implements hook_theme_suggestions_HOOK_alter().
  */
 function bootstrap_facets_theme_suggestions_facets_item_list_alter(&$suggestions, $variables) {
-  if ($facet = $variables['facet']) {
+  $facet = '';
+  if (!empty($variables['facet'])) {
+    $facet = $variables['facet'];
+  }
+  elseif($variables['facet'] === NULL && !empty($variables['items'])) {
+    $facet = $variables['items'][0]['#title']['#facet'];
+  }
+  if ($facet) {
     $widget = \Drupal::entityTypeManager()->getStorage('facets_facet')->load($facet->id())->getWidget();
     if (isset($widget['config']['bootstrap_component'])) {
       $suggestions[] = 'bootstrap_facets_' . $widget['config']['bootstrap_component'];
