@@ -31,10 +31,11 @@ function bootstrap_facets_form_alter(&$form, \Drupal\Core\Form\FormStateInterfac
  * Implements hook_theme_suggestions_HOOK_alter().
  */
 function bootstrap_facets_theme_suggestions_facets_item_list_alter(&$suggestions, $variables) {
-  $facet_id = $variables['facet_id'];
-  $widget = \Drupal::entityTypeManager()->getStorage('facets_facet')->load($facet_id)->getWidget();
-  if (isset($widget['config']['bootstrap_component'])) {
-    $suggestions[] = 'bootstrap_facets_' . $widget['config']['bootstrap_component'];
+  if ($facet = $variables['facet']) {
+    $widget = \Drupal::entityTypeManager()->getStorage('facets_facet')->load($facet->id())->getWidget();
+    if (isset($widget['config']['bootstrap_component'])) {
+      $suggestions[] = 'bootstrap_facets_' . $widget['config']['bootstrap_component'];
+    }
   }
 }
 
@@ -42,10 +43,11 @@ function bootstrap_facets_theme_suggestions_facets_item_list_alter(&$suggestions
  * Implements hook_theme_suggestions_HOOK_alter().
  */
 function bootstrap_facets_theme_suggestions_facets_result_item_alter(&$suggestions, $variables) {
-  $facet_id = $variables['facet_id'];
-  $widget = \Drupal::entityTypeManager()->getStorage('facets_facet')->load($facet_id)->getWidget();
-  if (isset($widget['config']['bootstrap_component'])) {
-    $suggestions[] = 'bootstrap_facets_' . $widget['config']['bootstrap_component'] . '_result_item';
+  if ($facet = $variables['facet']) {
+    $widget = \Drupal::entityTypeManager()->getStorage('facets_facet')->load($facet->id())->getWidget();
+    if (isset($widget['config']['bootstrap_component'])) {
+      $suggestions[] = 'bootstrap_facets_' . $widget['config']['bootstrap_component'] . '_result_item';
+    }
   }
 }
 
