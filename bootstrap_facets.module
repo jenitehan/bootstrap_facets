@@ -58,6 +58,7 @@ function bootstrap_facets_preprocess_bootstrap_facets_list_group(&$variables) {
   $items = $variables['items'];
   foreach ($items as $key => $item) {
     $variables['items'][$key]['value']['#attributes']['class'][] = 'list-group-item';
+    $variables['items'][$key]['value']['#attributes']['class'][] = 'bf-list-group-item';
     if ($variables['items'][$key]['value']['#title']['#is_active']) {
       $variables['items'][$key]['value']['#attributes']['class'][] = 'active';
     }

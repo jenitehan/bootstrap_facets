@@ -1,0 +1,30 @@
+/**
+ * CSS for list groups.
+ */
+.list-group.bf-list-group {
+  margin-bottom: 0;
+}
+
+.list-group-item.bf-list-group-item:last-child {
+  margin-bottom: -1px;
+}
+
+.bf-facets-widget-links .facets-soft-limit-link {
+  display: block;
+  font-size: 12px;
+  padding: 10px 15px 10px 32px;
+  position: relative;
+  text-decoration: none;
+}
+
+.bf-facets-widget-links .facets-soft-limit-link:before {
+  font-family: "Glyphicons Halflings";
+  content:"\2b";
+  position: absolute;
+  top: 10px;
+  left: 15px;
+}
+
+.bf-facets-widget-links .facets-soft-limit-link.open:before {
+  content:"\2212";
+}

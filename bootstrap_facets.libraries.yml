@@ -1,0 +1,5 @@
+bootstrap-facets-list-group:
+  css:
+    component:
+      css/bootstrap-facets-list-group.css:
+        minified: false

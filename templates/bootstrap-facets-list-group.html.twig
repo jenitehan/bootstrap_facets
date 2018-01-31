@@ -21,20 +21,30 @@
  * @ingroup themeable
  */
 #}
-{% if context.list_style %}
-  {%- set attributes = attributes.addClass('item-list__' ~ context.list_style) %}
-{% endif %}
-{% if items or empty %}
-  {%- if title is not empty -%}
-    <h3>{{ title }}</h3>
-  {%- endif -%}
-  {%- if items -%}
-    <div{{ attributes.addClass('list-group') }}>
-      {%- for item in items -%}
-        {{ item.value }}
-      {%- endfor -%}
-    </div>
-  {%- else -%}
-    {{- empty -}}
-  {%- endif -%}
-{%- endif %}
+{{ attach_library('bootstrap_facets/bootstrap-facets-list-group') }}
+{% set wrapper_attributes = create_attribute() %}
+{%
+set wrapper_classes = [
+  'facets-widget-' ~ context.list_style,
+  'bf-facets-widget-' ~ context.list_style,
+]
+%}
+<div{{ wrapper_attributes.addClass(wrapper_classes) }}>
+  {% if context.list_style %}
+    {%- set attributes = attributes.addClass('item-list__' ~ context.list_style) %}
+  {% endif %}
+  {% if items or empty %}
+    {%- if title is not empty -%}
+      <h3>{{ title }}</h3>
+    {%- endif -%}
+    {%- if items -%}
+      <ul{{ attributes.addClass('list-group','list-unstyled','bf-list-group') }}>
+        {%- for item in items -%}
+          <li>{{ item.value }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      {{- e<li>mpty -}}
+    {%- endif -%}
+  {%- endif %}
+</div>
