@@ -18,6 +18,11 @@
   margin-bottom: 1px;
 }
 
+.list-group-item.bf-list-group-item .facet-item__value {
+  max-width: 85%;
+  display: inline-block;
+}
+
 .bf-list-item--last-active .list-group-item.bf-list-group-item.active {
   margin-bottom: -1px;
 }
