@@ -1,5 +1,7 @@
 <?php
 
+use Drupal\Core\Template\Attribute;
+
 /**
  * Implements hook_form_alter().
  */
@@ -63,13 +65,22 @@ function bootstrap_facets_theme_suggestions_facets_result_item_alter(&$suggestio
  */
 function bootstrap_facets_preprocess_bootstrap_facets_list_group(&$variables) {
   $items = $variables['items'];
+  $active_items = [];
   foreach ($items as $key => $item) {
     $variables['items'][$key]['value']['#attributes']['class'][] = 'list-group-item';
     $variables['items'][$key]['value']['#attributes']['class'][] = 'bf-list-group-item';
+    $list_item_attributes = new Attribute();
     if ($variables['items'][$key]['value']['#title']['#is_active']) {
       $variables['items'][$key]['value']['#attributes']['class'][] = 'active';
+      $active_items[] = $key;
     }
+    $variables['items'][$key]['list_item_attributes'] = $list_item_attributes;
   }
+  if (!empty($active_items)) {
+    $list_item_classes[] = 'bf-list-item--last-active';
+    $list_item_attributes['class'] = $list_item_classes;
+  }
+  $variables['items'][end($active_items)]['list_item_attributes'] = $list_item_attributes;
 }
 
 /**

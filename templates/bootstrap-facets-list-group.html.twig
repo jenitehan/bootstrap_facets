@@ -40,7 +40,7 @@ set wrapper_classes = [
     {%- if items -%}
       <ul{{ attributes.addClass('list-group','list-unstyled','bf-list-group') }}>
         {%- for item in items -%}
-          <li>{{ item.value }}</li>
+          <li{{item.list_item_attributes}}>{{ item.value }}</li>
         {%- endfor -%}
       </ul>
     {%- else -%}
