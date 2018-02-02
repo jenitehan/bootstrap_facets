@@ -18,6 +18,21 @@
   margin-bottom: 1px;
 }
 
+.list-group-item.bf-list-group-item {
+  position: relative;
+}
+
+.list-group-item.bf-list-group-item .glyphicon-refresh {
+  display: none;
+}
+
+.list-group-item.bf-list-group-item:focus .glyphicon-refresh {
+  display: inline;
+  position: absolute;
+  top: 12px;
+  right: 50px;
+}
+
 .list-group-item.bf-list-group-item .facet-item__value {
   max-width: 85%;
   display: inline-block;

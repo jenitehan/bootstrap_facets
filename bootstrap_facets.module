@@ -54,7 +54,7 @@ function bootstrap_facets_theme_suggestions_facets_item_list_alter(&$suggestions
 function bootstrap_facets_theme_suggestions_facets_result_item_alter(&$suggestions, $variables) {
   if ($facet = $variables['facet']) {
     $widget = \Drupal::entityTypeManager()->getStorage('facets_facet')->load($facet->id())->getWidget();
-    if (isset($widget['config']['bootstrap_component'])) {
+    if (isset($widget['config']['bootstrap_component']) && $variables['theme_hook_original'] != 'facets_result_item__summary') {
       $suggestions[] = 'bootstrap_facets_' . $widget['config']['bootstrap_component'] . '_result_item';
     }
   }
@@ -69,6 +69,7 @@ function bootstrap_facets_preprocess_bootstrap_facets_list_group(&$variables) {
   foreach ($items as $key => $item) {
     $variables['items'][$key]['value']['#attributes']['class'][] = 'list-group-item';
     $variables['items'][$key]['value']['#attributes']['class'][] = 'bf-list-group-item';
+    $variables['items'][$key]['value']['#attributes']['tabindex'] = '0';
     $list_item_attributes = new Attribute();
     if ($variables['items'][$key]['value']['#title']['#is_active']) {
       $variables['items'][$key]['value']['#attributes']['class'][] = 'active';
