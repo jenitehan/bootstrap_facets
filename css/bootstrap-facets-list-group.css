@@ -18,19 +18,13 @@
   margin-bottom: 1px;
 }
 
-.list-group-item.bf-list-group-item {
-  position: relative;
-}
-
 .list-group-item.bf-list-group-item .glyphicon-refresh {
   display: none;
 }
 
 .list-group-item.bf-list-group-item:focus .glyphicon-refresh {
-  display: inline;
-  position: absolute;
-  top: 12px;
-  right: 50px;
+  display: inline-block;
+  margin-left: 5px;
 }
 
 .list-group-item.bf-list-group-item .facet-item__value {
