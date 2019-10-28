@@ -99,9 +99,11 @@ function bootstrap_facets_preprocess_bootstrap_facets_single_button_dropdown(&$v
  * Make sure split button dropdown has a title.
  */
 function bootstrap_facets_preprocess_bootstrap_facets_split_button_dropdown(&$variables) {
-  $facet_id = $variables['facet_id'];
-  $facet = \Drupal::entityTypeManager()->getStorage('facets_facet')->load($facet_id);
-  $variables['title'] = $facet->label();
+  if (isset($variables['facet'])) {
+    /** @var $facet Drupal\facets\Entity\Facet **/
+    $facet = $variables['facet'];
+    $variables['title'] = $facet->label();
+  }
 }
 
 /**
