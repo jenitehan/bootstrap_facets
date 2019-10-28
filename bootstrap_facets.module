@@ -7,13 +7,13 @@ use Drupal\Core\Template\Attribute;
  */
 function bootstrap_facets_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if ($form_id == 'facets_facet_edit_form'){
-    
+
     // Get the current widget.
     $build_info = $form_state->getBuildInfo();
     $widget = $build_info['callback_object']->getEntity()->getWidget();
-    
+
     // Add our field if it's a list widget.
-    if ($widget && $widget['type'] == 'links') {  
+    if ($widget && $widget['type'] == 'links') {
       $form['widget_config']['bootstrap_component'] = [
         '#title' => t('Bootstrap component'),
         '#type' => 'select',
@@ -65,23 +65,25 @@ function bootstrap_facets_theme_suggestions_facets_result_item_alter(&$suggestio
  */
 function bootstrap_facets_preprocess_bootstrap_facets_list_group(&$variables) {
   $items = $variables['items'];
-  $active_items = [];
-  foreach ($items as $key => $item) {
-    $variables['items'][$key]['value']['#attributes']['class'][] = 'list-group-item';
-    $variables['items'][$key]['value']['#attributes']['class'][] = 'bf-list-group-item';
-    $variables['items'][$key]['value']['#attributes']['tabindex'] = '0';
-    $list_item_attributes = new Attribute();
-    if ($variables['items'][$key]['value']['#title']['#is_active']) {
-      $variables['items'][$key]['value']['#attributes']['class'][] = 'active';
-      $active_items[] = $key;
+  if ($items) {
+    $active_items = [];
+    foreach ($items as $key => $item) {
+      $variables['items'][$key]['value']['#attributes']['class'][] = 'list-group-item';
+      $variables['items'][$key]['value']['#attributes']['class'][] = 'bf-list-group-item';
+      $variables['items'][$key]['value']['#attributes']['tabindex'] = '0';
+      $list_item_attributes = new Attribute();
+      if ($variables['items'][$key]['value']['#title']['#is_active']) {
+        $variables['items'][$key]['value']['#attributes']['class'][] = 'active';
+        $active_items[] = $key;
+      }
+      $variables['items'][$key]['list_item_attributes'] = $list_item_attributes;
     }
-    $variables['items'][$key]['list_item_attributes'] = $list_item_attributes;
+    if (!empty($active_items)) {
+      $list_item_classes[] = 'bf-list-item--last-active';
+      $list_item_attributes['class'] = $list_item_classes;
+    }
+    $variables['items'][end($active_items)]['list_item_attributes'] = $list_item_attributes;
   }
-  if (!empty($active_items)) {
-    $list_item_classes[] = 'bf-list-item--last-active';
-    $list_item_attributes['class'] = $list_item_classes;
-  }
-  $variables['items'][end($active_items)]['list_item_attributes'] = $list_item_attributes;
 }
 
 /**
