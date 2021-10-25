@@ -1,11 +1,12 @@
 <?php
 
 use Drupal\Core\Template\Attribute;
+use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_form_alter().
  */
-function bootstrap_facets_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function bootstrap_facets_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   if ($form_id == 'facets_facet_edit_form'){
 
     // Get the current widget.
