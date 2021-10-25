@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @file
+ * Provides facets as Bootsrap components.
+ */
+
 use Drupal\Core\Template\Attribute;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -7,7 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
  * Implements hook_form_alter().
  */
 function bootstrap_facets_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if ($form_id == 'facets_facet_edit_form'){
+  if ($form_id == 'facets_facet_edit_form') {
 
     // Get the current widget.
     $build_info = $form_state->getBuildInfo();
@@ -38,7 +43,7 @@ function bootstrap_facets_theme_suggestions_facets_item_list_alter(&$suggestions
   if (!empty($variables['facet'])) {
     $facet = $variables['facet'];
   }
-  elseif($variables['facet'] === NULL && !empty($variables['items'])) {
+  elseif ($variables['facet'] === NULL && !empty($variables['items'])) {
     $facet = $variables['items'][0]['#title']['#facet'];
   }
   if ($facet) {
