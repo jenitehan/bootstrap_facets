@@ -106,7 +106,7 @@ function bootstrap_facets_preprocess_bootstrap_facets_single_button_dropdown(&$v
  */
 function bootstrap_facets_preprocess_bootstrap_facets_split_button_dropdown(&$variables) {
   if (isset($variables['facet'])) {
-    /** @var $facet Drupal\facets\Entity\Facet **/
+    /** @var \Drupal\facets\Entity\Facet $facet **/
     $facet = $variables['facet'];
     $variables['title'] = $facet->label();
   }
