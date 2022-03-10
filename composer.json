@@ -1,0 +1,10 @@
+{
+  "name": "jenitehan/bootstrap_facets",
+  "type": "drupal-module",
+  "description": "Theme facets as Bootstrap components.",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://github.com/jenitehan/bootstrap_facets",
+  "minimum-stability": "dev",
+  "require": { }
+}
