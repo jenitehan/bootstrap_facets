@@ -22,7 +22,7 @@
   display: none;
 }
 
-.list-group-item.bf-list-group-item:focus .glyphicon-refresh {
+.list-group-item.bf-list-group-item:active .glyphicon-refresh {
   display: inline-block;
   margin-left: 5px;
 }
